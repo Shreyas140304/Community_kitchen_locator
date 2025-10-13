@@ -1,0 +1,139 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* full viewport height for vertical centering */
+    background-color: #FFF0C4;
+    /* same beige background */
+    margin: 0;
+}
+
+.loginForm {
+    width: 700px;
+    /* desired width */
+    max-width: 90%;
+    /* responsive */
+    background-color: #FFF;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 5px 8px 12px rgba(0, 0, 0, 0.35);
+    margin: 0 auto;
+    /* horizontal centering */
+    box-sizing: border-box;
+    /* include padding in width */
+}
+
+.loginForm h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #5a3e2b;
+    margin-bottom: 30px;
+}
+
+/* ===== ERROR MESSAGE STYLING ===== */
+.errorMsg {
+    width: 95%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    /* space from inputs */
+    background-color: #FDE8D0;
+    /* soft beige/orange background */
+    color: #B34700;
+    /* dark brown/orange text */
+    border-left: 4px solid #FA812F;
+    /* highlight line matching button color */
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    /* display: none; */
+    /* hidden by default */
+    /* box-sizing: border-box; */
+}
+
+/* Optional: show when there is an error */
+/* .errorMsg.active {
+    display: block;
+} */
+
+
+.loginForm .login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.loginForm .login-container input[type="text"],
+.loginForm .login-container input[type="password"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+    box-sizing: border-box;
+    /* ensures padding doesn't break width */
+}
+
+.loginForm .login-container input:focus {
+    border-color: #FA812F;
+    box-shadow: 0 0 6px rgba(250, 129, 47, 0.25);
+}
+
+/* Button */
+.loginForm .loginBtn {
+    width: 100%;
+    /* full width of form */
+    padding: 14px;
+    background-color: #FA812F;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    /* match input radius */
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    box-sizing: border-box;
+    display: block;
+}
+
+.loginForm .loginBtn:hover {
+    transform: scale(1.03);
+    background-color: #e36b1e;
+}
+
+.loginForm .link {
+    margin-top: 15px;
+    text-align: center;
+    /* font-weight: 600; */
+    /* color: #4e3b2b; */
+}
+
+.loginForm .link a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.loginForm .link a:hover {
+    color: #e36b1e;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 660px) {
+    .loginForm {
+        min-width: 30%;
+        max-width: 50%;
+        padding: 2rem;
+    }
+
+    .loginForm h1 {
+        font-size: 1.5rem;
+    }
+}

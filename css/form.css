@@ -1,0 +1,157 @@
+ * {
+     margin: 0;
+     padding: 0;
+ }
+
+ body {
+     height: 100%;
+     margin: 0;
+     font-family: "Poppins", sans-serif;
+     background: #FFF0C4;
+ }
+
+ /* main-container */
+ .main-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: auto;
+     padding: 20px;
+     box-sizing: border-box;
+
+ }
+
+ .form {
+     box-shadow: 5px 8px 8px rgba(0, 0, 0, 0.7);
+     position: relative;
+     background-color: #FFF;
+     width: 80%;
+     margin: 0 auto;
+     padding: 3rem;
+     align-items: center;
+ }
+
+ .form h1 {
+     position: absolute;
+     top: 18px;
+     left: 50%;
+     transform: translateX(-50%);
+     padding: 0 20px;
+     /* margin-bottom: 20px; */
+
+ }
+
+ /* ERROR MESSAGE STYLING  */
+ .errorMsg {
+     width: 98%;
+     padding: 10px 15px;
+     margin: 20px 0px;
+     /* space from inputs */
+     background-color: #FDE8D0;
+     /* soft beige/orange background */
+     color: #B34700;
+     /* dark brown/orange text */
+     border-left: 4px solid #FA812F;
+     /* highlight line matching button color */
+     border-radius: 5px;
+     font-size: 14px;
+     font-weight: 600;
+     /* display: none; */
+     /* hidden by default */
+     /* box-sizing: border-box; */
+ }
+
+ /* Optional: show when there is an error */
+ /* .errorMsg.active {
+     display: block;
+ } */
+
+ .container {
+     margin: 5% 0;
+     display: flex;
+     justify-content: space-between;
+     gap: 20px;
+     flex-wrap: wrap;
+ }
+
+
+ .column {
+     position: relative;
+     flex: 1;
+     min-width: 150px;
+     max-width: 350px;
+ }
+
+ .column span {
+     display: inline-block;
+     margin-bottom: 10px;
+     font-size: 1.2rem;
+     font-weight: 600;
+     padding: 3px;
+     border-bottom: 2px solid #FA812F;
+ }
+
+ .container input {
+     width: 100%;
+     padding: 10px;
+     margin: 10px 0;
+     outline: none;
+     border-radius: 5px;
+     border: 1px solid grey;
+     font-size: 15px;
+ }
+
+ .registerForm .container input:focus {
+     border-color: #FA812F;
+     box-shadow: 0 0 6px rgba(250, 129, 47, 0.25);
+ }
+
+ .created_at_field input,
+ .password input {
+     width: 100%;
+     padding: 10px;
+     margin: 10px 0;
+     outline: none;
+     border-radius: 5px;
+     border: 1px solid grey;
+     font-size: 15px;
+ }
+
+ form .registerBtn {
+     width: 100%;
+     /* full width of form */
+     padding: 14px;
+     background-color: #FA812F;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     /* match input radius */
+     font-weight: 600;
+     font-size: 1rem;
+     cursor: pointer;
+     margin-top: 10px;
+     transition: transform 0.15s ease, background-color 0.15s ease;
+     box-sizing: border-box;
+     display: block;
+ }
+
+ .registerBtn:hover {
+     transform: scale(1.03);
+     background-color: #e36b1e;
+ }
+
+ .link {
+     margin-top: 10px;
+     text-align: center;
+ }
+
+ .link a {
+     text-decoration: none;
+     color: black;
+     font-weight: 600;
+ }
+
+ .link a:hover {
+     color: #e36b1e;
+     text-decoration: underline;
+ }
