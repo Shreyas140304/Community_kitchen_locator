@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kitchen Location Communicator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css" />
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header id="navbar">
+        <div class="logo"><img src="../images/logo.jpg" alt="Logo"></div>
+        <nav>
+            <ul>
+                <li><i class="fa-solid fa-bowl-food"></i><a href="#">FIND FOOD</a></li>
+                <li><i class="fa-solid fa-face-smile"></i><a href="#">OUR STORY</a></li>
+                <li><i class="fa-solid fa-hand-holding-dollar"></i><a href="#" class="donate">DONATE</a></li>
+                <li><i class="fa-solid fa-comment"></i><a href="">FEEDBACK</a></li>
+            </ul>
+        </nav>
+        <div class="right-links">
+            <div class="login-box">
+                <h3>Login</h3>
+                <div class="login-options">
+                    <button class="option-btn">NGO</button>
+                    <button class="option-btn">Volunteer</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>FIND FOOD PANTRIES AND FOOD PROGRAMS IN YOUR AREA</h1>
+            <p>Use our map to view hours, locations and information for all available kitchens and food programs in your
+                region.</p>
+            <a href="#" class="cta cmnBtn">Find Food</a>
+        </div>
+    </section>
+
+    <!-- floatingQuote -->
+    <section class="quote-sec">
+        <div class="hero-card">
+            <div class="hero-text">
+                <h1>EVERYONE DESERVES A PLACE AT THE TABLE THIS THANKSGIVING</h1>
+                <p>"Every meal deserves a hand, and every hand deserves a chance to help. Our kitchen communicator
+                    connects generous hearts with neighbors in need, ensuring no one goes hungry this season."</p>
+            </div>
+            <button class="hero-button"> <i class="fa-solid fa-heart"></i> GIVE NOW</button>
+        </div>
+    </section>
+
+    <!-- section4 -->
+
+
+    <section class="ourStory">
+        <h1> OUR MISSION IS TO END <br> HUNGER</h1>
+        <h4> Because we believe a healthy community starts with food. </h4>
+        <div class="stacked-gallery">
+            <div class="gallery-item left">
+                <img src="../images/hunger.jpg" alt="Community kitchen service">
+                <div class="text-box">
+                    <h3>Connecting Communities</h3>
+                    <p>Bridging hearts through food — our kitchens serve meals with love and dignity.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item right">
+                <img src="../images/img1.jpg" alt="Volunteers serving">
+                <div class="text-box">
+                    <h3>Every Hand Helps</h3>
+                    <p>Volunteers make every meal possible, ensuring no plate goes empty.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item left">
+                <img src="../images/img2.jpg" alt="Families sharing meal">
+                <div class="text-box">
+                    <h3>Sharing Hope</h3>
+                    <p>Together, we create moments of warmth, care, and community connection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="action-section">
+        <div class="section-header">
+            <h2>JOIN THE MOVEMENT AGAINST HUNGER</h2>
+            <p>Together, we can ensure every neighbor has access to nourishing food and lasting hope.</p>
+        </div>
+
+        <div class="action-cards">
+            <!-- Find Food Card -->
+            <div class="card find-food">
+                <div class="card-content">
+                    <h3>Find Food Near You</h3>
+                    <p>“No one should wonder where their next meal is coming from. Find nearby kitchens ready to serve
+                        with love.”</p>
+                    <button class="cmnBtn FindBtn">Find Food</button>
+                </div>
+            </div>
+
+            <!-- Donate Card -->
+            <div class="card donatee">
+                <div class="card-content">
+                    <h3>Donate to Fight Hunger</h3>
+                    <p>“A small act of kindness can fill an empty plate. Your donation helps feed families and fuel
+                        hope.”</p>
+                    <button class="cmnBtn donateBtn">Donate Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="donation-container">
+
+        <!-- LEFT: Donation Form -->
+        <div class="donation-form-section">
+            <h2>Make a Donation</h2>
+            <p>Your support helps provide meals and hope to families in need.</p>
+
+            <form class="donation-form">
+                <!-- Donation Type -->
+                <div class="donation-type">
+                    <label><input type="radio" name="donationType" value="one-time" checked> One Time</label>
+                    <label><input type="radio" name="donationType" value="monthly"> Monthly</label>
+                </div>
+
+                <!-- Donation Amounts -->
+                <div class="donation-amounts">
+                    <button type="button" class="amount">₹100</button>
+                    <button type="button" class="amount">₹250</button>
+                    <button type="button" class="amount">₹500</button>
+                    <button type="button" class="amount">₹1000</button>
+                    <button type="button" class="amount">₹2000</button>
+                    <button type="button" class="amount">₹5000</button>
+                </div>
+
+                <!-- Custom Donation Input -->
+                <div class="custom-donation">
+                    <input type="number" placeholder="Enter custom amount (₹)" class="custom-input">
+                </div>
+
+                <!-- Continue Button -->
+                <button type="submit" class="continue-btn">Continue with Your Donation</button>
+            </form>
+        </div>
+
+        <!-- RIGHT: Image -->
+        <div class="donation-image">
+            <img src="../images/Donate.jpg"
+                alt="Donation Image">
+        </div>
+
+    </section>
+
+    <!-- ======= Footer Section ======= -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- About -->
+            <div class="footer-col about">
+                <img src="logo.jpg" alt="Logo" class="logoImg">
+                <p>Connecting communities through food — because no one should go hungry. Join us in spreading hope, one
+                    meal at a time.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Find Food</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-col contact">
+                <h4>Contact Us</h4>
+                <p><strong>Email:</strong> support@kitchencomm.in</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <p><strong>Address:</strong> Mumbai, Maharashtra, India</p>
+            </div>
+
+            <!-- Social -->
+            <div class="footer-col social">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Kitchen Communicator | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // JS to change navbar color on scroll
+        window.addEventListener("scroll", function () {
+            const navbar = document.getElementById("navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+
+
+
+        const items = document.querySelectorAll('.gallery-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // animate only once
+                }
+            });
+        }, { threshold: 0.4 });
+        items.forEach(item => observer.observe(item));
+
+
+        // donation form --> amount selection
+        const amountButtons = document.querySelectorAll('.amount');
+        const customInput = document.querySelector('.custom-input');
+        let selectedAmount = null;
+
+        amountButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove 'active' from all buttons
+                amountButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Add 'active' to the clicked button
+                button.classList.add('active');
+
+                // Clear custom input if user clicks a predefined amount
+                customInput.value = '';
+
+                // Store the selected amount
+                selectedAmount = button.textContent.replace('₹', '').trim();
+                console.log("Selected amount:", selectedAmount);
+            });
+        });
+
+        // If user enters a custom amount, deselect all buttons
+        customInput.addEventListener('input', () => {
+            amountButtons.forEach(btn => btn.classList.remove('active'));
+            selectedAmount = customInput.value;
+            console.log("Custom amount:", selectedAmount);
+        });
+    </script>
+</body>
+
+</html>
