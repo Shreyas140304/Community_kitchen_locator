@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/donation.css">
+    <!-- <link rel="stylesheet" href="main.css"> -->
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="donation-checkout">
+        <div class="checkout-left">
+            <img src="../images/54462.jpg" alt="Donation Impact">
+            <div class="impact-text">Your impact: ₹100 = 1 meal for someone in need</div>
+        </div>
+
+        <div class="checkout-right">
+            <h2>Complete Your Donation</h2>
+
+            <div class="donation-type">
+                <label><input type="radio" name="type" checked> One-Time</label>
+                <label><input type="radio" name="type"> Monthly</label>
+            </div>
+
+            <div class="amount-grid">
+                <div class="amount-btn">₹100</div>
+                <div class="amount-btn">₹250</div>
+                <div class="amount-btn">₹500</div>
+                <div class="amount-btn">₹1000</div>
+                <div class="amount-btn">₹2000</div>
+                <div class="amount-btn">₹5000</div>
+            </div>
+
+            <div class="custom-amount">
+                <input type="number" placeholder="Enter custom amount (₹)" id="customAmount">
+            </div>
+
+            <div class="payment-methods">
+                <div class="payment-btn">Pay with Bank Account</div>
+                <div class="payment-btn">Pay with UPI</div>
+                <div class="payment-btn">Pay with Card</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Popup -->
+    <div class="overlay" id="confirmOverlay">
+        <div class="confirm-box">
+            <h3>Confirm your payment</h3>
+            <p id="confirmAmountText">Are you sure you want to proceed?</p>
+            <div class="confirm-btns">
+                <button class="btn btn-confirm" id="confirmYes">Confirm</button>
+                <button class="btn btn-cancel" id="confirmNo">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="overlay" id="successOverlay">
+        <div class="success-box">
+            <h3>✅ Payment Successful!</h3>
+            <p>Thank you for your donation 💛</p>
+            <button class="btn-close" id="closeSuccess">Close</button>
+        </div>
+    </div>
+
+    <!-- ======= Footer Section ======= -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- About -->
+            <div class="footer-col about">
+                <img src="logo.jpg" alt="Logo" class="logoImg">
+                <p>Connecting communities through food — because no one should go hungry. Join us in spreading hope, one
+                    meal at a time.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Find Food</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-col contact">
+                <h4>Contact Us</h4>
+                <p><strong>Email:</strong> support@kitchencomm.in</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <p><strong>Address:</strong> Mumbai, Maharashtra, India</p>
+            </div>
+
+            <!-- Social -->
+            <div class="footer-col social">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Kitchen Communicator | All Rights Reserved</p>
+        </div>
+    </footer>
+    <script>
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        const customInput = document.getElementById('customAmount');
+        const paymentBtns = document.querySelectorAll('.payment-btn');
+        const confirmOverlay = document.getElementById('confirmOverlay');
+        const successOverlay = document.getElementById('successOverlay');
+        const confirmText = document.getElementById('confirmAmountText');
+        const confirmYes = document.getElementById('confirmYes');
+        const confirmNo = document.getElementById('confirmNo');
+        const closeSuccess = document.getElementById('closeSuccess');
+
+        let selectedAmount = null;
+
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                amountBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                customInput.value = '';
+                selectedAmount = btn.textContent.replace('₹', '').trim();
+            });
+        });
+
+        customInput.addEventListener('input', () => {
+            amountBtns.forEach(b => b.classList.remove('active'));
+            selectedAmount = customInput.value;
+        });
+
+        paymentBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!selectedAmount || selectedAmount <= 0) {
+                    alert("Please select or enter a donation amount.");
+                    return;
+                }
+                confirmText.textContent = `Are you sure you want to proceed with ₹${selectedAmount}?`;
+                confirmOverlay.style.display = 'flex';
+            });
+        });
+
+        confirmYes.addEventListener('click', () => {
+            confirmOverlay.style.display = 'none';
+            successOverlay.style.display = 'flex';
+        });
+
+        confirmNo.addEventListener('click', () => {
+            confirmOverlay.style.display = 'none';
+        });
+
+        closeSuccess.addEventListener('click', () => {
+            successOverlay.style.display = 'none';
+        });
+    </script>
+
+</body>
+
+</html>
