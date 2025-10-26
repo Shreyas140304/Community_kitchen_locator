@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <title>Document</title>
 </head>
 
@@ -18,15 +18,12 @@
         <a href="#" data-page="add-kitchen"><i class="fa-solid fa-plus"></i> Add New Kitchen</a>
         <a href="#" data-page="manage-kitchen"><i class="fa-solid fa-list-check"></i> Manage Kitchens</a>
         <a href="#" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
-        <a href="#" data-page="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        <a href="{{ url_for('logout') }}" data-page="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
     </div>
 
-    <div class="container">
+    <div class="container"> 
         <div class="topbar">
-            <h2 class="greet">Welcome, HelpingHands NGO</h2> <!-- //add dynamic content at place of helpingHands NGO -->
-            <!-- <div class="top-right-info">
-                "Good food is the foundation of genuine happiness."
-            </div> -->
+            <h2 class="greet">Welcome, HelpingHands NGO</h2> 
 
         </div>
         <div class="main-content">
@@ -35,11 +32,11 @@
                 <div class="stats">
                     <div class="card">
                         <h3>Total Kitchens</h3>
-                        <h2>8</h2>
+                        <h2>{{ count }}</h2>
                     </div>
                     <div class="card">
                         <h3>Active Kitchens</h3>
-                        <h2>6</h2>
+                        <h2>{{ count_active }}</h2>
                     </div>
                     <div class="card">
                         <h3>Pending Approval</h3>
@@ -48,6 +45,7 @@
                 </div>
 
                 <div class="kitchen-table">
+                    {% if kitchens %}
                     <table>
                         <thead>
                             <tr>
@@ -57,30 +55,24 @@
                                 <th>Contact</th>
                                 <th>Capacity</th>
                                 <th>Status</th>
-
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="kitchenTable">
+                            {% for kitchen in kitchens %}
                             <tr>
-                                <td>1</td>
-                                <td>Sai Community Kitchen</td>
-                                <td>Pune, Maharashtra</td>
-                                <td>9876543210</td>
-                                <td>200 Meals/Day</td>
-                                <td><span class="status-active">Active</span></td>
-
+                                <td>{{ loop.index }}</td>
+                                <td>{{ kitchen.kitchen_name }}</td>
+                                <td>{{ kitchen.address }}</td>
+                                <td>{{ kitchen.phone_num }}</td>
+                                <td>{{ kitchen.capacity }}</td>
+                                <td>{{ kitchen.sts }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Annapurna Kitchen</td>
-                                <td>Nagpur, Maharashtra</td>
-                                <td>9988776655</td>
-                                <td>150 Meals/Day</td>
-                                <td><span class="status-inactive">Inactive</span></td>
-
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
+                    {% else %}
+                    <p>No kitchens found.</p>
+                    {% endif %}
                 </div>
             </div>
 
@@ -88,15 +80,15 @@
             <div id="add-kitchen" class="content-section">
                 <h3>Add New Kitchen</h3>
 
-                <form class="add-kitchen-form">
+                <form class="add-kitchen-form" action="/welcome" method="POST">
 
                     <!-- 1. Location and Contact Information -->
                     <fieldset>
                         <legend>Location & Contact Information</legend>
 
                         <div class="kitchenName bottomPadding">
-                            <label class="l-style" for="kitchen-name">Kitchen Name:</label>
-                            <input type="text" id="kitchen-name" name="kitchen-name" required>
+                            <label class="l-style" for="kitchen_name">Kitchen Name:</label>
+                            <input type="text" id="kitchen_name" name="kitchen_name" required>
                         </div>
 
                         <div class="kitchenAdd bottomPadding">
@@ -111,23 +103,23 @@
                         </div>
 
                         <div class="serviceArea bottomPadding">
-                            <label class="l-style" for="service-area">Service Area:</label>
-                            <input type="text" id="service-area" name="service-area" required>
+                            <label class="l-style" for="service_area">Service Area:</label>
+                            <input type="text" id="service_area" name="service_area" required>
                         </div>
 
                         <div class="contactPerson bottomPadding">
-                            <label class="l-style" for="contact-person">Contact Person:</label>
-                            <input type="text" id="contact-person" name="contact-person" required>
+                            <label class="l-style" for="contact_person">Contact Person:</label>
+                            <input type="text" id="contact_Name" name="contact_Name" required>
                         </div>
 
                         <div class="contactPhn bottomPadding">
-                            <label class="l-style" for="contact-phone">Contact Phone:</label>
-                            <input type="tel" id="contact-phone" name="contact-phone" required>
+                            <label class="l-style" for="contact_phone">Contact Phone:</label>
+                            <input type="tel" id="phone_num" name="phone_num" required>
                         </div>
 
                         <div class="contactEmail bottomPadding">
-                            <label class="l-style" for="contact-email">Contact Email:</label>
-                            <input type="email" id="contact-email" name="contact-email" required>
+                            <label class="l-style" for="contact_email">Contact Email:</label>
+                            <input type="email" id="contact_email" name="contact_email" required>
                         </div>
 
 
@@ -146,19 +138,20 @@
                         <div class="openDays bottomPadding">
                             <label class="l-style">Days Open:</label>
                             <div class="checkbox-group">
-                                <label><input type="checkbox" name="days[]" value="Mon"> Mon</label>
-                                <label><input type="checkbox" name="days[]" value="Tue"> Tue</label>
-                                <label><input type="checkbox" name="days[]" value="Wed"> Wed</label>
-                                <label><input type="checkbox" name="days[]" value="Thu"> Thu</label>
-                                <label><input type="checkbox" name="days[]" value="Fri"> Fri</label>
-                                <label><input type="checkbox" name="days[]" value="Sat"> Sat</label>
-                                <label><input type="checkbox" name="days[]" value="Sun"> Sun</label>
+                                <label><input type="checkbox" name="days" value="Mon"> Mon</label>
+                                <label><input type="checkbox" name="days" value="Tue"> Tue</label>
+                                <label><input type="checkbox" name="days" value="Wed"> Wed</label>
+                                <label><input type="checkbox" name="days" value="Thu"> Thu</label>
+                                <label><input type="checkbox" name="days" value="Fri"> Fri</label>
+                                <label><input type="checkbox" name="days" value="Sat"> Sat</label>
+                                <label><input type="checkbox" name="days" value="Sun"> Sun</label>
+                                <label><input type="checkbox" name="days" value="All"> All</label>
                             </div>
                         </div>
 
                         <div class="mealTime bottomPadding">
-                            <label class="l-style" for="meal-time">Meal Serving Time:</label>
-                            <input type="text" id="meal-time" name="meal-time" placeholder="e.g., 12:00 PM - 2:00 PM"
+                            <label class="l-style" for="meal_time">Meal Serving Time:</label>
+                            <input type="text" id="meal_time" name="meal_time" placeholder="e.g., 12:00 PM - 2:00 PM"
                                 required>
                         </div>
 
@@ -174,7 +167,7 @@
 
                         <div class="splHrs bottomPadding">
                             <label class="l-style" for="special-hours">Special / Holiday Hours:</label>
-                            <textarea id="special-hours" name="special-hours" rows="2"
+                            <textarea id="special_hours" name="special_hours" rows="2"
                                 placeholder="e.g., closed on public holidays"></textarea>
                         </div>
 
@@ -187,10 +180,10 @@
                         <div class="mealType bottomPadding">
                             <label class="l-style">Meal Types:</label>
                             <div class="checkbox-group">
-                                <label><input type="checkbox" name="meal-types[]" value="Hot Meals"> Hot Meals</label>
-                                <label><input type="checkbox" name="meal-types[]" value="Packed Lunches"> Packed
+                                <label><input type="checkbox" name="meal_types" value="Hot Meals"> Hot Meals</label>
+                                <label><input type="checkbox" name="meal_types" value="Packed Lunches"> Packed
                                     Lunches</label>
-                                <label><input type="checkbox" name="meal-types[]" value="Groceries"> Groceries</label>
+                                <label><input type="checkbox" name="meal_types" value="Groceries"> Groceries</label>
                             </div>
                         </div>
 
@@ -198,10 +191,10 @@
                         <div class="audience bottomPadding">
                             <label class="l-style">Target Audience:</label>
                             <div class="checkbox-group">
-                                <label><input type="checkbox" name="audience[]" value="Families"> Families</label>
-                                <label><input type="checkbox" name="audience[]" value="Seniors"> Seniors</label>
-                                <label><input type="checkbox" name="audience[]" value="Children"> Children</label>
-                                <label><input type="checkbox" name="audience[]" value="Homeless"> Homeless
+                                <label><input type="checkbox" name="audience" value="Families"> Families</label>
+                                <label><input type="checkbox" name="audience" value="Seniors"> Seniors</label>
+                                <label><input type="checkbox" name="audience" value="Children"> Children</label>
+                                <label><input type="checkbox" name="audience" value="Homeless"> Homeless
                                     Individuals</label>
                             </div>
                         </div>
@@ -213,7 +206,7 @@
 
                         <div class="status bottomPadding">
                             <label class="l-style" for="status">Status:</label>
-                            <select id="status" name="status" required>
+                            <select id="sts" name="sts" required>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>
@@ -230,6 +223,7 @@
             <!-- Manage Kitchen Section -->
             <div id="manage-kitchen" class="content-section">
                 <div class="table-container">
+                    {% if kitchens %}
                     <table>
                         <thead>
                             <tr>
@@ -239,36 +233,28 @@
                                 <th>Contact</th>
                                 <th>Capacity</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="kitchenTable">
+                            {% for kitchen in kitchens %}
                             <tr>
-                                <td>1</td>
-                                <td>Sai Community Kitchen</td>
-                                <td>Pune, Maharashtra</td>
-                                <td>9876543210</td>
-                                <td>200 Meals/Day</td>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ kitchen.kitchen_name }}</td>
+                                <td>{{ kitchen.address }}</td>
+                                <td>{{ kitchen.phone_num }}</td>
+                                <td>{{ kitchen.capacity }}</td>
                                 <td class="status-active">Active</td>
                                 <td>
                                     <button onclick="openEditKitchen()">Edit</button>
                                     <button>Delete</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Annapurna Kitchen</td>
-                                <td>Nagpur, Maharashtra</td>
-                                <td>9988776655</td>
-                                <td>150 Meals/Day</td>
-                                <td class="status-inactive">Inactive</td>
-                                <td>
-                                    <button onclick="editKitchen(this)">Edit</button>
-                                    <button>Delete</button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
+                    {% else %}
+                    <p>No kitchens found.</p>
+                    {% endif %}
                 </div>
                 <!-- Edit Kitchen Modal -->
                 <div id="editKitchenModal" class="modal">
@@ -276,7 +262,7 @@
                         <span class="close" onclick="closeEditKitchenModal()">&times;</span>
                         <h3>Edit Kitchen</h3>
 
-                        <form id="edit-kitchen-form">
+                        <form id="edit-kitchen-form" action="/edit_kitchen" method="POST">
                             <fieldset>
                                 <legend>Location & Contact Information</legend>
 
@@ -284,7 +270,7 @@
 
                                 <div class="kitchenName bottomPadding">
                                     <label class="l-style" for="edit-kitchen-name">Kitchen Name:</label>
-                                    <input type="text" id="edit-kitchen-name" name="kitchen-name" required>
+                                    <input type="text" id="edit-kitchen-name" name="kitchen_name" required>
                                 </div>
 
                                 <div class="kitchenAdd bottomPadding">
@@ -299,22 +285,22 @@
 
                                 <div class="serviceArea bottomPadding">
                                     <label class="l-style" for="edit-service-area">Service Area:</label>
-                                    <input type="text" id="edit-service-area" name="service-area" required>
+                                    <input type="text" id="edit-service-area" name="service_area" required>
                                 </div>
 
                                 <div class="contactPerson bottomPadding">
                                     <label class="l-style" for="edit-contact-person">Contact Person:</label>
-                                    <input type="text" id="edit-contact-person" name="contact-person" required>
+                                    <input type="text" id="edit-contact_Name" name="contact_Name" required>
                                 </div>
 
                                 <div class="contactPhn bottomPadding">
                                     <label class="l-style" for="edit-contact-phone">Contact Phone:</label>
-                                    <input type="tel" id="edit-contact-phone" name="contact-phone" required>
+                                    <input type="tel" id="edit-phone_num" name="phone_num" required>
                                 </div>
 
                                 <div class="contactEmail bottomPadding">
                                     <label class="l-style" for="edit-contact-email">Contact Email:</label>
-                                    <input type="email" id="edit-contact-email" name="contact-email" required>
+                                    <input type="email" id="edit-contact-email" name="contact_email" required>
                                 </div>
 
                                 <div class="KitchenDirection bottomPadding">
@@ -330,19 +316,19 @@
                                 <div class="bottomPadding">
                                     <label class="l-style">Days Open:</label>
                                     <div class="checkbox-group">
-                                        <label><input type="checkbox" name="days[]" value="Mon"> Mon</label>
-                                        <label><input type="checkbox" name="days[]" value="Tue"> Tue</label>
-                                        <label><input type="checkbox" name="days[]" value="Wed"> Wed</label>
-                                        <label><input type="checkbox" name="days[]" value="Thu"> Thu</label>
-                                        <label><input type="checkbox" name="days[]" value="Fri"> Fri</label>
-                                        <label><input type="checkbox" name="days[]" value="Sat"> Sat</label>
-                                        <label><input type="checkbox" name="days[]" value="Sun"> Sun</label>
+                                        <label><input type="checkbox" name="days" value="Mon"> Mon</label>
+                                        <label><input type="checkbox" name="days" value="Tue"> Tue</label>
+                                        <label><input type="checkbox" name="days" value="Wed"> Wed</label>
+                                        <label><input type="checkbox" name="days" value="Thu"> Thu</label>
+                                        <label><input type="checkbox" name="days" value="Fri"> Fri</label>
+                                        <label><input type="checkbox" name="days" value="Sat"> Sat</label>
+                                        <label><input type="checkbox" name="days" value="Sun"> Sun</label>
                                     </div>
                                 </div>
 
                                 <div class="bottomPadding">
                                     <label class="l-style" for="meal-time">Meal Serving Time:</label>
-                                    <input type="text" id="meal-time" name="meal-time" placeholder="12:00 PM - 2:00 PM">
+                                    <input type="text" id="meal_time" name="meal_time" placeholder="12:00 PM - 2:00 PM">
                                 </div>
 
                                 <div class="bottomPadding">
@@ -356,7 +342,7 @@
 
                                 <div class="bottomPadding">
                                     <label class="l-style" for="special-hours">Special / Holiday Hours:</label>
-                                    <textarea id="special-hours" name="special-hours" rows="2"
+                                    <textarea id="special_hours" name="special_hours" rows="2"
                                         placeholder="Closed on public holidays"></textarea>
                                 </div>
                             </fieldset>
@@ -368,11 +354,11 @@
                                 <div class="bottomPadding">
                                     <label class="l-style">Meal Types:</label>
                                     <div class="checkbox-group">
-                                        <label><input type="checkbox" name="meal-types[]" value="Hot Meals"> Hot
+                                        <label><input type="checkbox" name="meal_types" value="Hot Meals"> Hot
                                             Meals</label>
-                                        <label><input type="checkbox" name="meal-types[]" value="Packed Lunches"> Packed
+                                        <label><input type="checkbox" name="meal_types" value="Packed Lunches"> Packed
                                             Lunches</label>
-                                        <label><input type="checkbox" name="meal-types[]" value="Groceries">
+                                        <label><input type="checkbox" name="meal_types" value="Groceries">
                                             Groceries</label>
                                     </div>
                                 </div>
@@ -380,12 +366,12 @@
                                 <div class="bottomPadding">
                                     <label class="l-style">Target Audience:</label>
                                     <div class="checkbox-group">
-                                        <label><input type="checkbox" name="audience[]" value="Families">
+                                        <label><input type="checkbox" name="audience" value="Families">
                                             Families</label>
-                                        <label><input type="checkbox" name="audience[]" value="Seniors"> Seniors</label>
-                                        <label><input type="checkbox" name="audience[]" value="Children">
+                                        <label><input type="checkbox" name="audience" value="Seniors"> Seniors</label>
+                                        <label><input type="checkbox" name="audience" value="Children">
                                             Children</label>
-                                        <label><input type="checkbox" name="audience[]" value="Homeless">
+                                        <label><input type="checkbox" name="audience" value="Homeless">
                                             Homeless</label>
                                     </div>
                                 </div>
@@ -397,7 +383,7 @@
 
                                 <div class="bottomPadding">
                                     <label class="l-style" for="status">Status:</label>
-                                    <select id="status" name="status">
+                                    <select id="sts" name="sts">
                                         <option value="active">Active</option>
                                         <option value="inactive">Inactive</option>
                                     </select>
@@ -504,7 +490,7 @@
 
 
     </div>
-    <script src="../JS/dashboard.js"></script>
+    <script src="static/jS/dashboard.js"></script>
     <script>
         function openEditKitchen() {
             document.getElementById("editKitchenModal").style.display = "flex";
