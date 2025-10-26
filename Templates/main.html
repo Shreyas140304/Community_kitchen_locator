@@ -8,27 +8,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href=" {{ url_for('static' , filename='css/base.css') }} "/>
 </head>
 
 <body>
 
     <!-- Navbar -->
     <header id="navbar">
-        <div class="logo"><img src="../images/logo.jpg" alt="Logo"></div>
+        <div class="logo"><img src="{{ url_for('static' , filename = 'logo.jpg') }}" alt="Logo"></div>
         <nav>
             <ul>
-                <li><i class="fa-solid fa-bowl-food"></i><a href="#">FIND FOOD</a></li>
-                <li><i class="fa-solid fa-face-smile"></i><a href="#">OUR STORY</a></li>
-                <li><i class="fa-solid fa-hand-holding-dollar"></i><a href="#" class="donate">DONATE</a></li>
-                <li><i class="fa-solid fa-comment"></i><a href="">FEEDBACK</a></li>
+                <li><i class="fa-solid fa-bowl-food"></i><a href="{{ url_for('find_food') }}">FIND FOOD</a></li>
+                <li><i class="fa-solid fa-face-smile"></i><a href="ourstory.html">OUR STORY</a></li>
+                <li><i class="fa-solid fa-hand-holding-dollar"></i><a href="{{ url_for('donation') }}" class="donate">DONATE</a></li>
+                <li><i class="fa-solid fa-comment"></i><a href="{{ url_for('feedback') }}">FEEDBACK</a></li>
             </ul>
         </nav>
         <div class="right-links">
             <div class="login-box">
                 <h3>Login</h3>
                 <div class="login-options">
+                    <form action="{{ url_for('login') }}" method="post">
                     <button class="option-btn">NGO</button>
+                    </form>
                     <button class="option-btn">Volunteer</button>
                 </div>
             </div>
@@ -66,7 +68,7 @@
         <h4> Because we believe a healthy community starts with food. </h4>
         <div class="stacked-gallery">
             <div class="gallery-item left">
-                <img src="../images/hunger.jpg" alt="Community kitchen service">
+                <img src="{{ url_for('static' , filename = 'hunger.jpg') }}" alt="Community kitchen service">
                 <div class="text-box">
                     <h3>Connecting Communities</h3>
                     <p>Bridging hearts through food — our kitchens serve meals with love and dignity.</p>
@@ -74,7 +76,7 @@
             </div>
 
             <div class="gallery-item right">
-                <img src="../images/img1.jpg" alt="Volunteers serving">
+                <img src="{{ url_for('static' , filename = 'img1.jpg') }}" alt="Volunteers serving">
                 <div class="text-box">
                     <h3>Every Hand Helps</h3>
                     <p>Volunteers make every meal possible, ensuring no plate goes empty.</p>
@@ -82,7 +84,7 @@
             </div>
 
             <div class="gallery-item left">
-                <img src="../images/img2.jpg" alt="Families sharing meal">
+                <img src="{{ url_for('static' , filename = 'img2.jpg') }}" alt="Families sharing meal">
                 <div class="text-box">
                     <h3>Sharing Hope</h3>
                     <p>Together, we create moments of warmth, care, and community connection.</p>
@@ -157,7 +159,7 @@
 
         <!-- RIGHT: Image -->
         <div class="donation-image">
-            <img src="../images/Donate.jpg"
+            <img src="{{ url_for('static' , filename = 'Donate.jpg') }}"
                 alt="Donation Image">
         </div>
 
@@ -169,7 +171,7 @@
 
             <!-- About -->
             <div class="footer-col about">
-                <img src="logo.jpg" alt="Logo" class="logoImg">
+                <img src="{{ url_for('static' , filename = 'logo.jpg') }}" alt="Logo" class="logoImg">
                 <p>Connecting communities through food — because no one should go hungry. Join us in spreading hope, one
                     meal at a time.</p>
             </div>
