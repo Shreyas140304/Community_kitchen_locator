@@ -7,99 +7,84 @@
     <title>Find Food | Community Kitchen Locator</title>
     <link rel="stylesheet" href="../css/findFood.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/findfood.css') }}">
 </head>
 
 <body>
     <!-- Navbar -->
     <header id="navbar">
-        <div class="logo"><img src="../images/logo.jpg" alt="Logo"></div>
+        <div class="logo"><img src="{{ url_for('static' , filename = 'logo.jpg') }}" alt="Logo"></div>
         <nav>
             <ul>
-                <li><i class="fa-solid fa-bowl-food"></i><a href="#">FIND FOOD</a></li>
-                <li><i class="fa-solid fa-face-smile"></i><a href="#">OUR STORY</a></li>
-                <li><i class="fa-solid fa-hand-holding-dollar"></i><a href="#" class="donate">DONATE</a></li>
-                <li><i class="fa-solid fa-comment"></i><a href="">FEEDBACK</a></li>
+                <li><i class="fa-solid fa-bowl-food"></i><a href="{{ url_for('find_food') }}">FIND FOOD</a></li>
+                <li><i class="fa-solid fa-face-smile"></i><a href="ourstory.html">OUR STORY</a></li>
+                <li><i class="fa-solid fa-hand-holding-dollar"></i><a href="{{ url_for('donation') }}" class="donate">DONATE</a></li>
+                <li><i class="fa-solid fa-comment"></i><a href="{{ url_for('feedback') }}">FEEDBACK</a></li>
             </ul>
         </nav>
         <div class="right-links">
             <div class="login-box">
                 <h3>Login</h3>
                 <div class="login-options">
+                    <form action="{{ url_for('login') }}" method="post">
                     <button class="option-btn">NGO</button>
+                    </form>
                     <button class="option-btn">Volunteer</button>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Find Food Section -->
-    <main class="find-food-container">
-        <section class="search-section">
-            <h1>Find Food Kitchens Near You</h1>
-            <p>Enter your ZIP code to locate nearby food kitchens and services.</p>
-
-            <div class="zip-search">
-                <input type="text" placeholder="Enter ZIP code" class="zip-input">
-                <button class="find-btn">Find Food</button>
-            </div>
-        </section>
-
-        <section class="kitchen-list-section">
-            <h2>Available Kitchens:</h2>
-
-            <div class="table-container">
-                <table class="kitchen-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Kitchen Name</th>
-                            <th>Address</th>
-                            <th>Contact</th>
-                            <th>Phone Number</th>
-                            <th>Days Open</th>
-                            <th>Meal Time</th>
-                            <th>Frequency</th>
-                            <th>Special Hours</th>
-                            <th>Meal Types</th>
-                            <th>Audience</th>
-                            <th>Capacity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>DeepSagar Community Kitchen</td>
-                            <td>Mumbai, Maharashtra</td>
-                            <td>Komolika Dagare</td>
-                            <td>9876543210</td>
-                            <td>Mon - Sat</td>
-                            <td>12 PM - 3 PM</td>
-                            <td>Weekly</td>
-                            <td>Festive hours extended</td>
-                            <td>Lunch, Dinner</td>
-                            <td>Families</td>
-                            <td>100 People</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Hope Kitchen</td>
-                            <td>Pune, Maharashtra</td>
-                            <td>Rahul Patil</td>
-                            <td>9876543222</td>
-                            <td>All Days</td>
-                            <td>11 AM - 2 PM</td>
-                            <td>Daily</td>
-                            <td>Holiday Meals Available</td>
-                            <td>Breakfast, Lunch</td>
-                            <td>Everyone</td>
-                            <td>150 People</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
-
+    <div class="find-food-container">
+        <h1>Find Food Kitchens Near You</h1>
+        <p>Enter your ZIP code to locate nearby food kitchens and services.</p>
+    <form action="/find_food" method="post">
+        <input type="text" name="zip" placeholder="Enter ZIP code">
+        <button type="submit">Find Food</button>
+    </form>
+    <div class="kitchen-table">
+        {% if kitchens %}
+        <h2>Available Kitchens:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Kitchen Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Phone Number</th>
+                    <th>Days Open</th>
+                    <th>Meal Time</th>
+                    <th>Frequency</th>
+                    <th>Special Hours</th>
+                    <th>Meal Types</th>
+                    <th>Audience</th>
+                    <th>Capacity</th>
+                </tr>
+            </thead>
+            {% for kitchen in kitchens %}
+            <tbody id="kitchenTable">
+                <tr>
+                    <td>{{ kitchen.name }}</td>
+                    <td>{{ kitchen.address }}</td>
+                    <td>{{ kitchen.service_area }}</td>
+                    <td>{{ kitchen.contact_Name }}</td>
+                    <td>{{ kitchen.phone_num }}</td>
+                    <td>{{ kitchen.days }}</td>
+                    <td>{{ kitchen.meal_time }}</td>
+                    <td>{{ kitchen.frequency }}</td>
+                    <td>{{ kitchen.special_hours }}</td>
+                    <td>{{ kitchen.meal_types }}</td>
+                    <td>{{ kitchen.audience }}</td>
+                    <td>{{ kitchen.capacity }}</td>
+                </tr>
+            </tbody>
+            {% else %}
+            <p>No kitchens found for the provided ZIP code.</p>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    </div>
 
     <!-- ======= Footer Section ======= -->
     <footer class="footer">
@@ -107,7 +92,7 @@
 
             <!-- About -->
             <div class="footer-col about">
-                <img src="../images/logo.jpg" alt="Logo" class="logoImg">
+                <img src="{{ url_for('static' , filename = 'logo.jpg') }}" alt="Logo" class="logoImg">
                 <p>Connecting communities through food — because no one should go hungry. Join us in spreading hope, one
                     meal at a time.</p>
             </div>
