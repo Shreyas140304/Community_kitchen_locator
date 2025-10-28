@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/feedback.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/feedback.css') }}">
     <title>Document</title>
 </head>
 
@@ -12,7 +12,7 @@
 
     <div class="main-container">
 
-        <form id="feedbackForm" class="feedbackForm" action="">
+        <form id="feedbackForm" class="feedbackForm" action="/feedback" method ="POST">
             <h1>Community Kitchen Feedback</h1>
             <h4>Help us improve our kitchen services and system</h4>
             <div class="user-name">
@@ -22,10 +22,10 @@
                 <input type="text" name="email" id="email" placeholder="Email">
             </div>
             <div class="Kitchen-detail">
-                <input type="text" name="email" id="email" placeholder="Kitchen Name / Location ">
+                <input type="text" name="detail" id="detail" placeholder="Kitchen Name / Location ">
             </div>
             <div class="Rating">
-                <input type="number" name="rating" id="rating" placeholder="Rating">
+                <input type="number" name="rating" id="rating" placeholder="Give ratinng out of 10">
             </div>
             <div class="comments">
                 <textarea name="comments" id="comments" placeholder="Add your comments.."></textarea>
