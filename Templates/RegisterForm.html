@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
     <title>Document</title>
 </head>
 
 <body>
     <div class="main-container">
-        <form class="form registerForm" action="">
+        <form class="form registerForm" action="/register" method="POST">
             <h1>Register</h1>
-             <div class="errorMsg">
+            <!-- <div class="errorMsg">
                 this is an errormsg
-             </div>
+             </div> -->
             <div class="container">
                 <div class="personal-details column">
                     <span>Personal Details</span>
@@ -77,7 +77,7 @@
 
             <button type="submit" class="registerBtn">Register</button>
             <div class="link">
-                Already have an account? <a href="" id="login-in">Login</a>
+                Already have an account? <a href="/login" id="login-in">Login</a>
             </div>
         </form>
     </div>
