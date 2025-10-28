@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/donation.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/donation.css') }}">
     <!-- <link rel="stylesheet" href="main.css"> -->
     <style>
 
@@ -16,32 +16,32 @@
 </head>
 
 <body>
-
-    <!-- Navbar -->
     <header id="navbar">
-        <div class="logo"><img src="../images/logo.jpg" alt="Logo"></div>
+        <div class="logo"><img src="{{ url_for('static' , filename = 'logo.jpg') }}" alt="Logo"></div>
         <nav>
             <ul>
-                <li><i class="fa-solid fa-bowl-food"></i><a href="#">FIND FOOD</a></li>
-                <li><i class="fa-solid fa-face-smile"></i><a href="#">OUR STORY</a></li>
-                <li><i class="fa-solid fa-hand-holding-dollar"></i><a href="#" class="donate">DONATE</a></li>
-                <li><i class="fa-solid fa-comment"></i><a href="">FEEDBACK</a></li>
+                <li><i class="fa-solid fa-bowl-food"></i><a href="{{ url_for('find_food') }}">FIND FOOD</a></li>
+                <li><i class="fa-solid fa-face-smile"></i><a href="ourstory.html">OUR STORY</a></li>
+                <li><i class="fa-solid fa-hand-holding-dollar"></i><a href="{{ url_for('donation') }}" class="donate">DONATE</a></li>
+                <li><i class="fa-solid fa-comment"></i><a href="{{ url_for('feedback') }}">FEEDBACK</a></li>
             </ul>
         </nav>
         <div class="right-links">
             <div class="login-box">
                 <h3>Login</h3>
                 <div class="login-options">
+                    <form action="{{ url_for('login') }}" method="post">
                     <button class="option-btn">NGO</button>
+                    </form>
                     <button class="option-btn">Volunteer</button>
                 </div>
             </div>
         </div>
     </header>
-    
+
     <div class="donation-checkout">
         <div class="checkout-left">
-            <img src="../images/54462.jpg" alt="Donation Impact">
+            <img src="{{ url_for('static' , filename = '54462.jpg') }}" alt="Donation Impact">
             <div class="impact-text">Your impact: ₹100 = 1 meal for someone in need</div>
         </div>
 
@@ -101,7 +101,7 @@
 
             <!-- About -->
             <div class="footer-col about">
-                <img src="../images/logo.jpg" alt="Logo" class="logoImg">
+                <img src="{{ url_for('static' , filename = 'logo.jpg') }}" alt="Logo" class="logoImg">
                 <p>Connecting communities through food — because no one should go hungry. Join us in spreading hope, one
                     meal at a time.</p>
             </div>
