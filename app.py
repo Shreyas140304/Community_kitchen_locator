@@ -109,7 +109,10 @@ def register():
 def welcome(): #both POST and GET HTTP methods. GET is used to show the login form; POST is used to submit login credentials.
      if 'loggedin' in session: # require login to view welcome
          if request.method == "POST":
-            fields = ['kitchen_name','address','zip','service_area','contact_Name','phone_num','contact_email','directions','days','meal_time','frequency','special_hours','meal_types','audience','capacity','sts']
+            fields = ['kitchen_name','address','zip','service_area',
+                      'contact_Name','phone_num','contact_email','directions',
+                      'days','meal_time','frequency','special_hours',
+                      'meal_types','audience','capacity','sts']
             data = {}
             for field in fields:
                  values = request.form.getlist(field)
@@ -125,7 +128,10 @@ def welcome(): #both POST and GET HTTP methods. GET is used to show the login fo
                     meal_types, audience, capacity, 
                     sts) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ''', (data['kitchen_name'], data['address'], data['zip'], data['service_area'], data['contact_Name'], data['phone_num'], data['contact_email'], data['directions'], data['days'], data['meal_time'], data['frequency'], data['special_hours'], data['meal_types'], data['audience'], data['capacity'], data['sts'].lower()))
+            ''', (data['kitchen_name'], data['address'], data['zip'], data['service_area'],
+                  data['contact_Name'], data['phone_num'], data['contact_email'], data['directions'],
+                  data['days'], data['meal_time'], data['frequency'], data['special_hours'],
+                  data['meal_types'], data['audience'], data['capacity'], data['sts'].lower()))
             mysql.connection.commit()
             flash('Kitchen details submitted successfully!', 'success')
             
@@ -210,6 +216,10 @@ def edit_kitchen():
           
      return redirect(url_for('login'))
 
+# Now the dashboard part ends.
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# From here the donation and feedback pages routes are created.
+
 @app.route("/feedback",methods=["POST","GET"])
 def feedback():
         if request.method == "POST":
@@ -232,3 +242,4 @@ def feedback():
 @app.route("/donation")
 def donation():
     return render_template("donation.html")
+
