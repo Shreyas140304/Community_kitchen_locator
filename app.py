@@ -242,4 +242,6 @@ def feedback():
 @app.route("/donation")
 def donation():
     return render_template("donation.html")
-
+@app.route("/ourstory",methods=["GET"])
+def ourstory():
+    return render_template("ourstory.html")
